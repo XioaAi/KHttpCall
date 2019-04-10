@@ -8,6 +8,7 @@ import com.xiaoai.zhao.khttpcall.base.BaseMVPActivity
 import com.xiaoai.zhao.khttpcall.base.base_entities.BaseResultEntity
 import com.xiaoai.zhao.khttpcall.di.module.LoginModule
 import com.xiaoai.zhao.khttpcall.entities.LoginReqEntity
+import com.xiaoai.zhao.khttpcall.entities.LoginResultEntity
 import com.xiaoai.zhao.khttpcall.getMainComponent
 import com.xiaoai.zhao.khttpcall.mvp.contract.LoginContract
 import com.xiaoai.zhao.khttpcall.mvp.model.LoginModel
@@ -16,9 +17,9 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 class LoginActivity : BaseMVPActivity<LoginContract.LoginView, LoginModel, LoginPresenter>(),LoginContract.LoginView{
 
-    override fun loginSuccess(loginInfo: BaseResultEntity) {
+    override fun loginSuccess(loginInfo: BaseResultEntity<LoginResultEntity>) {
         logd(loginInfo.errorMsg)
-        showFailMsg(loginInfo.errorMsg)
+        showFailMsg(loginInfo.errorMsg+"--"+loginInfo.data)
     }
 
     override fun onCreate(savedInstanceState: Bundle?) {

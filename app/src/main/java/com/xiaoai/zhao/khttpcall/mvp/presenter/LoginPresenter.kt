@@ -4,6 +4,7 @@ import android.util.Log
 import com.xiaoai.zhao.khttpcall.base.base_entities.BaseResultEntity
 import com.xiaoai.zhao.khttpcall.base.base_mvp.BasePresenter
 import com.xiaoai.zhao.khttpcall.entities.LoginReqEntity
+import com.xiaoai.zhao.khttpcall.entities.LoginResultEntity
 import com.xiaoai.zhao.khttpcall.mvp.contract.LoginContract
 import com.xiaoai.zhao.khttpcall.mvp.model.LoginModel
 import com.xiaoai.zhao.khttpcall.net.rxjava.ISubscriberListener
@@ -20,12 +21,12 @@ class LoginPresenter
         addSubscription(loginModel.login(loginReqEntity)
                 .subscribeOn(Schedulers.newThread())
                 .observeOn(AndroidSchedulers.mainThread())
-                .subscribe(RxSubscriber(object:ISubscriberListener<BaseResultEntity>{
+                .subscribe(RxSubscriber(object:ISubscriberListener<BaseResultEntity<LoginResultEntity>>{
                     override fun onError(errorInfo: String) {
                         Log.e("XiaoAi",errorInfo)
                     }
 
-                    override fun onSuccess(t: BaseResultEntity) {
+                    override fun onSuccess(t: BaseResultEntity<LoginResultEntity>) {
                         loginView.loginSuccess(t)
                     }
                 })))

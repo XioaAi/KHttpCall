@@ -50,7 +50,7 @@ class RxSubscriber<T>(iSubscriberListener : ISubscriberListener<T>) : Subscriber
     }
 
     override fun onNext(t: T) {
-        var result  = t as BaseResultEntity
+        var result  = t as BaseResultEntity<T>
         if (result.errorCode==400){
             onException(APIException.DATA_ERROR,result.errorMsg)
         }else{
